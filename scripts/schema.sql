@@ -9,7 +9,8 @@ drop table recommendation;
 
 create table user(
     userid varchar(255) not null primary key,
-    password varchar(255) not null
+    password varchar(255) not null,
+    foreign key (userid) references user(userid)
 );
 
 create table user_details (
@@ -18,8 +19,6 @@ create table user_details (
     lastname varchar(255) not null,
     age int,
     city varchar(255) not null,
-
-    foreign key (userid) references user(userid)
 );
 
 create table preference ( 
