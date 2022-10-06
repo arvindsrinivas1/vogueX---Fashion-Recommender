@@ -7,7 +7,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_required, current_user
 
-from website import contracts
+from application.website import contracts
 from . import models
 from . import db 
 preferencesbp = Blueprint('preferences', __name__, url_prefix='/')
