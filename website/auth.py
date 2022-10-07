@@ -23,7 +23,7 @@ def login():
                 flash('Logged in successfully!', category='success')
                 session[contracts.SessionParameters.USERID] = user.get_id()
                 login_user(user, remember=True)
-                return redirect(url_for('views.home'))
+                return render_template("home.html", user=user)
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
@@ -38,6 +38,7 @@ def logout():
     logout_user()
     session.pop(contracts.SessionParameters.USERID, None)
     return redirect(url_for('auth.login'))
+
 
 # get and post both come to the same aciton. When we hit the sign up end point on the URL, a get request is generated.
 # This generates the view. Submitting the form hits the same action. We run the logic for post now.
@@ -75,11 +76,10 @@ def sign_up():
             db.session.commit()
             login_user(new_user, remember=True)
             flash('Account created!', category='success')
-            return redirect(url_for('views.home'))
+            return render_template("home.html", user=new_user)
 
     # For get request.
     return render_template("sign_up.html", user=current_user)
-
 
 
 @auth.route('/profile-update', methods=['GET', 'POST'])
